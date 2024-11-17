@@ -33,5 +33,5 @@ calculate_cdr_jobs(
 A list containing the estimated jobs.
 }
 \description{
-This function estimates the number of jobs created by CDR technologies based on given GCAM database.
+This function estimates the number of jobs created by CDR technologies based on a given GCAM database.
 }

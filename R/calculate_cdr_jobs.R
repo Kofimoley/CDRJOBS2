@@ -1,6 +1,6 @@
 #' Function to calculate CDR Jobs
 #'
-#' This function estimates the number of jobs created by CDR technologies based on given GCAM database.
+#' This function estimates the number of jobs created by CDR technologies based on a given GCAM database.
 #'
 #' @param db_path Path to the GCAM database.
 #' @param db_name Name of the GCAM database.
@@ -13,7 +13,7 @@
 #' @import dplyr rgcam ggplot2
 #' @export
 calculate_cdr_jobs <- function(db_path, db_name, dat_file, scenario_list, output_path, output_type = c("csv", "list"), create_plots = TRUE) {
-  # Load necessary libraries
+# Load necessary libraries
   library(dplyr)
   library(rgcam)
   library(ggplot2)
