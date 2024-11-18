@@ -6,13 +6,14 @@
 #' @param db_name Name of the GCAM database.
 #' @param dat_file Name of the .dat file to load.
 #' @param scenario_list List of scenarios to include.
+#' @param region_list List of regions to filter, default is all regions.
 #' @param output_path Path to save output files.
 #' @param output_type Output format, either "csv" or "list".
 #' @param create_plots Logical, if TRUE, generates plots for the results.
 #' @return A list containing the estimated jobs.
 #' @import dplyr rgcam ggplot2
 #' @export
-calculate_cdr_jobs <- function(db_path, db_name, dat_file, scenario_list, output_path, output_type = c("csv", "list"), create_plots = TRUE) {
+calculate_cdr_jobs <- function(db_path, db_name, dat_file, scenario_list, region_list = NULL, output_path, output_type = c("csv", "list"), create_plots = TRUE) {
 # Load necessary libraries
   library(dplyr)
   library(rgcam)
@@ -47,6 +48,11 @@ calculate_cdr_jobs <- function(db_path, db_name, dat_file, scenario_list, output
 
   # Query the database for CDR outputs
   CDR_Output <- getQuery(CDR_tech, "CDR by tech")
+
+  # Filter by region if region_list is provided
+  if (!is.null(region_list)) {
+    CDR_Output <- CDR_Output %>% filter(region %in% region_list)
+  }
 
   # Ensure the job intensity dataset exists
   if (!exists("CDR_Job_Inten", envir = asNamespace("CDRJOBS2"))) {
